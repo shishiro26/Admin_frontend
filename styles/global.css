@@ -1,0 +1,82 @@
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
+}
+
+/* Centered Container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login Card */
+.login-card {
+  background-color: #1a1a1a; /* Dark gray card background */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #fff; /* White text for heading */
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #333; /* Input field background */
+  color: #fff; /* White text for input */
+  font-size: 1rem;
+}
+
+.form-group input::placeholder {
+  color: #aaa; /* Placeholder text color */
+}
+
+/* Error Message */
+.error {
+  color: #ff4d4d; /* Red for error text */
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50; /* Green background */
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #45a049; /* Slightly darker green */
+}
