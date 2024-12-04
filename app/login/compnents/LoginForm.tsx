@@ -15,7 +15,7 @@ export default function LoginForm() {
     // Mock API call or authentication logic
     if (username === "admin" && phone === "1234567890") {
       localStorage.setItem("authToken", "mockToken123");
-      router.push("/admin/dashboard");
+      router.push("/admin/users");
     } else {
       setError("Invalid username or phone number");
     }
