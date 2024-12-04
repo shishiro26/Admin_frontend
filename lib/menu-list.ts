@@ -1,4 +1,4 @@
-import { Users, Waypoints, Bookmark, LucideIcon } from "lucide-react";
+import { Users, Waypoints, BusFront, LucideIcon } from "lucide-react";
 
 type Submenu = {
   href: string;
@@ -32,7 +32,7 @@ export function getMenuList(): Group[] {
         {
           href: "/admin/buses",
           label: "Buses",
-          icon: Bookmark,
+          icon: BusFront,
         },
         {
           href: "/admin/city",
