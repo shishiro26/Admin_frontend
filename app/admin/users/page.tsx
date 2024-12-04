@@ -43,7 +43,7 @@ interface User {
 }
 
 export default function UsersPage() {
-  const API_URL = process.env.BACKEND_URL;
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/users`;
 
   const [users, setUsers] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -86,7 +86,7 @@ export default function UsersPage() {
 
   useEffect(() => {
     fetchUsers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, sortKey, sortOrder, statusFilter]);
 
   // Sorting handler

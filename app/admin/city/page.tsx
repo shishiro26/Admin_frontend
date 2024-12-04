@@ -56,7 +56,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 export default function CityListingPage() {
-  const API_URL = process.env.BACKEND_URL;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   const [cities, setCities] = useState<City[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,7 +76,7 @@ export default function CityListingPage() {
     setLoading(true);
     try {
       const response = await fetch(
-        `${API_URL}/list?page=${currentPage}&limit=10&sort=${sortKey}`
+        `${API_URL}/api/cities/list?page=${currentPage}&limit=10&sort=${sortKey}`
       );
       if (!response.ok) throw new Error("Error fetching cities");
       const data = await response.json();
@@ -91,7 +91,7 @@ export default function CityListingPage() {
 
   useEffect(() => {
     fetchCities();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, sortKey]);
 
   const handleStopChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,7 +116,7 @@ export default function CityListingPage() {
 
     try {
       const response = await fetch(
-        `${API_URL}/add-stops/${selectedCity.cityPincode}`,
+        `${API_URL}/api/cities/add-stops/${selectedCity.cityPincode}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

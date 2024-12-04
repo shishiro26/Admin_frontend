@@ -50,7 +50,7 @@ import {
 } from "@/components/ui/pagination";
 
 export default function BusTable() {
-  const API_URL = process.env.BACKEND_URL;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [buses, setBuses] = useState<Bus[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -58,7 +58,7 @@ export default function BusTable() {
   const [noData, setNoData] = useState(false);
 
   // Sorting and Filtering State
-  
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filterBySeats, setFilterBySeats] = useState<string>("all"); // 'all', 'zero', 'non-zero'
   const [sortKey, setSortKey] = useState<string>("busNumber");
@@ -77,7 +77,7 @@ export default function BusTable() {
           : { key: "seats", value: filterBySeats === "zero" ? 0 : { $gt: 0 } };
 
       const response = await fetch(
-        `${API_URL}/admin/list?page=${currentPage}&limit=${busesPerPage}&sort=${sortKey}&order=${sortOrder}&filter=${JSON.stringify(
+        `${API_URL}/api/bus/admin/list?page=${currentPage}&limit=${busesPerPage}&sort=${sortKey}&order=${sortOrder}&filter=${JSON.stringify(
           filter
         )}`,
         {
@@ -98,7 +98,7 @@ export default function BusTable() {
           }) => {
             // Fetch owner name
             const ownerResponse = await fetch(
-              `${process.env.BACKEND_URL}/api/users/${bus.ownerId}`,
+              `${process.env.NEXT_PUBLIC_API_URL}/api/users/${bus.ownerId}`,
               {
                 method: "GET",
               }
@@ -108,7 +108,7 @@ export default function BusTable() {
 
             // Fetch city names for source, destination, and rest stops
             const sourceResponse = await fetch(
-              `${process.env.BACKEND_URL}/api/cities/city/${bus.source}`,
+              `${process.env.NEXT_PUBLIC_API_URL}/api/cities/city/${bus.source}`,
               {
                 method: "GET",
               }
@@ -117,7 +117,7 @@ export default function BusTable() {
             const sourceCity = sourceData.city.cityName || "Unknown City"; // Fallback if city name is not available
 
             const destinationResponse = await fetch(
-              `${process.env.BACKEND_URL}/api/cities/city/${bus.destination}`,
+              `${process.env.NEXT_PUBLIC_API_URL}/api/cities/city/${bus.destination}`,
               {
                 method: "GET",
               }
@@ -130,7 +130,7 @@ export default function BusTable() {
             const restStopsCities = await Promise.all(
               bus.restStops.map(async (restStopId: unknown) => {
                 const restStopResponse = await fetch(
-                  `${process.env.BACKEND_URL}/api/cities/city/${restStopId}`,
+                  `${process.env.NEXT_PUBLIC_API_URL}/api/cities/city/${restStopId}`,
                   {
                     method: "GET",
                   }
@@ -164,7 +164,7 @@ export default function BusTable() {
 
   useEffect(() => {
     fetchBuses();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, sortKey, sortOrder, filterBySeats]);
 
   // Sorting handler

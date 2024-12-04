@@ -48,7 +48,7 @@ export default function EditBusPage() {
     const fetchBusDetails = async () => {
       try {
         const response = await fetch(
-          `${process.env.BACKEND_URL}/api/bus/buses/${busId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/bus/buses/${busId}`
         );
         if (!response.ok) throw new Error("Failed to fetch bus details");
         const data = await response.json();
@@ -72,14 +72,14 @@ export default function EditBusPage() {
     };
 
     fetchBusDetails();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchOwners = async () => {
     setLoadingOwners(true);
     try {
       const response = await fetch(
-        "${process.env.BACKEND_URL}/api/users?page=1&limit=100&sort=name&filter=Owner"
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users?page=1&limit=100&sort=name&filter=Owner`
       );
       const data = await response.json();
       setOwners(data.users); // Store owners in state
@@ -94,7 +94,7 @@ export default function EditBusPage() {
     setLoadingStaff(true);
     try {
       const response = await fetch(
-        "${process.env.BACKEND_URL}/api/users?page=1&limit=100&sort=name&filter=Staff"
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users?page=1&limit=100&sort=name&filter=Staff`
       );
       const data = await response.json();
       setStaff(data.users); // Store owners in state
@@ -108,7 +108,7 @@ export default function EditBusPage() {
     setLoadingCities(true);
     try {
       const response = await fetch(
-        "${process.env.BACKEND_URL}/api/cities/list?page=1&limit=100"
+        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/list?page=1&limit=100`
       );
       const data = await response.json();
       console.log(data.cities);
@@ -204,13 +204,16 @@ export default function EditBusPage() {
     console.log(payload);
 
     try {
-      const response = await fetch("${process.env.BACKEND_URL}/api/bus/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/bus/add`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       console.log(formattedData);
 
